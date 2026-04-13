@@ -1,0 +1,83 @@
+
+
+
+nomes = ["da","fa","oi","da"]
+
+def insert(nomesi):
+    nome = input("insert um nome: ")
+    nomesi.append(nome)
+    return nome
+
+def listar(nomesl):
+    return nomesl
+
+def delete(nomesd):
+    pos = int(input("insert posição: "))
+    if pos >= 0 and pos < len(nomesd):
+        removido = nomesd.pop(pos)
+        return removido, pos
+    else:
+        return None, None
+
+def procurar(nomesp):
+    nome = input("insert nome: ")
+
+    for i in range(len(nomesp)):
+        if nomesp[i] == nome:
+            return nome, i
+
+    return None, None
+
+
+while True:
+    # mostrar lista
+    print("\n--- LISTA ---")
+    lista = listar(nomes)
+    for i in range(len(lista)):
+        print(i, "-", lista[i])
+
+    print("\n1 - inserir nome")
+    print("2 - listar nomes")
+    print("3 - delete nome")
+    print("4 - procurar nome")
+    print("5 - sair")
+
+    opt = input("Escolha Opção: ")
+
+    match opt:
+        case "1":
+            nome = insert(nomes)
+            print("Inserido:", nome)
+
+        case "2":
+            lista = listar(nomes)
+            for i in range(len(lista)):
+                print(i, "-", lista[i])
+
+        case "3":
+            removido, pos = delete(nomes)
+            if removido != None:
+                print("Apagado:", removido, "na posição", pos)
+            else:
+                print("Posição inválida")
+
+        case "4":
+            nome, pos = procurar(nomes)
+
+            if nome != None:
+                print("Encontrado:", nome, "na posição", pos)
+
+                op = input("Apagar? (s/n): ")
+
+                if op == "s":
+                    nomes.pop(pos)
+                    print("Apagado:", nome, "da posição", pos)
+            else:
+                print("Nome não encontrado")
+
+        case "5":
+            print("fim do programa")
+            break
+
+        case _:
+            print("Opção inválida")
